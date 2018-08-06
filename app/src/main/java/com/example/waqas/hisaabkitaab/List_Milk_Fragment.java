@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.sdsmdg.tastytoast.TastyToast;
 import com.weiwangcn.betterspinner.library.BetterSpinner;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -94,7 +95,11 @@ public class List_Milk_Fragment extends AppCompatActivity {
         }
         milkCursorAdapter = new MilkCursorAdapter(this, R.layout.list_milk_items, milk_items_list, sqliteHelper);
         listView.setAdapter(milkCursorAdapter);
-        tv_Grand_Total_Price.setText("ٹوٹل بل: " + String.valueOf(sqliteHelper.Grand_Total));
+
+        int number = Integer.parseInt(String.valueOf(sqliteHelper.Grand_Total));
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+        String result = numberFormat.format(number);
+        tv_Grand_Total_Price.setText("ٹوٹل بل: " + result);
     }
 
     private void setListners() {
@@ -125,6 +130,8 @@ public class List_Milk_Fragment extends AppCompatActivity {
 
         sqliteHelper = new SqliteHelper(this);
         list_milk_fragment = new List_Milk_Fragment();
+
+        Toast.makeText(List_Milk_Fragment.this, String.valueOf(tv_time.getText().toString()), Toast.LENGTH_SHORT).show();
 
         adapter_Milk_Quantity = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, str_Milk_Quantity) {
             @Override
@@ -207,9 +214,13 @@ public class List_Milk_Fragment extends AppCompatActivity {
 
                 if (per_kg_value == 0 || Milk_Quantity.getSelectedItem().toString() == "0") {
                     TastyToast.makeText(List_Milk_Fragment.this, "دودھ کی مقدار سلکٹ کریں!", Toast.LENGTH_SHORT, TastyToast.ERROR).show();
-                } else if (tv_time.getText().toString().isEmpty()) {
+                } else if (tv_date.getText().toString().contains("تاریخ درج کریں")) {
+                    TastyToast.makeText(List_Milk_Fragment.this, "آپ نے تاریخ سلکٹ نہیں کی!", Toast.LENGTH_SHORT, TastyToast.ERROR).show();
+                } else if (tv_time.getText().toString().contains("وقت درج کریں")) {
                     TastyToast.makeText(List_Milk_Fragment.this, "آپ نے وقت سلکٹ نہیں کیا!", Toast.LENGTH_SHORT, TastyToast.ERROR).show();
-                } else if (per_kg_value != 0 && !strDate.toString().isEmpty() && !aTime.toString().isEmpty()) {
+                } else if (per_kg_value != 0
+                        && !tv_date.getText().toString().contains("تاریخ درج کریں")
+                        && !tv_time.getText().toString().contains("وقت درج کریں")) {
                     Milk_Items milk_items = new Milk_Items(DateNTime, Per_KG, Total);
                     sqliteHelper.add_Milk(milk_items);
 

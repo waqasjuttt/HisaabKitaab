@@ -15,7 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
 
@@ -30,6 +32,11 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
         this.listMilkFragment = list_milk_fragment;
         this.sqliteHelper = helper;
         this.milk_itemses = objects;
+    }
+
+    @Override
+    public int getCount() {
+        return milk_itemses.size();
     }
 
     @Override
@@ -48,7 +55,12 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
 
         holder.tv_date.setText(getItem(position).getDateNTime());
         holder.tv_KG.setText(getItem(position).getMilk_Quantity() + " کلو");
-        holder.tv_Total.setText(String.valueOf(getItem(position).getTotal_Milk()) + " روپے");
+
+        int number = Integer.parseInt(String.valueOf(getItem(position).getTotal_Milk()));
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+        String result = numberFormat.format(number);
+
+        holder.tv_Total.setText(result + " روپے");
 
         //Delete an item
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
@@ -91,19 +103,19 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
         //Edit/Update an item
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(listMilkFragment);
+            public void onClick(final View view) {
+                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(listMilkFragment);
                 alertDialog.setTitle("Update Milk's Quantity");
 
                 final LinearLayout layout = new LinearLayout(listMilkFragment);
                 layout.setPadding(10, 10, 10, 10);
                 layout.setOrientation(LinearLayout.VERTICAL);
 
-                final EditText nameBox = new EditText(listMilkFragment);
-                nameBox.setHint("Milk Quantity");
-                layout.addView(nameBox);
+                final EditText milk_quantity = new EditText(listMilkFragment);
+                milk_quantity.setHint("Milk Quantity");
+                layout.addView(milk_quantity);
 
-                nameBox.setText(getItem(position).getMilk_Quantity());
+                milk_quantity.setText(getItem(position).getMilk_Quantity());
 //                jobBox.setText(getItem(position).get());
 
                 alertDialog.setView(layout);
@@ -112,16 +124,22 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        int total = Integer.parseInt(nameBox.getText().toString());
-                        total = total * 75;
-                        Milk_Items milkItems = new Milk_Items((getItem(position).getDateNTime()), nameBox.getText().toString(), total);
-                        milkItems.setID(getItem(position).getID());
-                        sqliteHelper.updateMilkData(milkItems); //update to db
-                        Toast.makeText(listMilkFragment, "Updated!", Toast.LENGTH_SHORT).show();
 
-                        //reload the database to view
-                        sqliteHelper.Grand_Total = 0;
-                        listMilkFragment.reloadingDatabase();
+                        int value = Integer.parseInt(milk_quantity.getText().toString());
+                        if (value > 15) {
+                            Toast.makeText(getContext(), "دودھ کی مقدار 1 سے 15 تک ہونی چاہی", Toast.LENGTH_SHORT).show();
+                        } else {
+                            int total = Integer.parseInt(milk_quantity.getText().toString());
+                            total = total * 75;
+                            Milk_Items milkItems = new Milk_Items((getItem(position).getDateNTime()), milk_quantity.getText().toString(), total);
+                            milkItems.setID(getItem(position).getID());
+                            sqliteHelper.updateMilkData(milkItems); //update to db
+                            Toast.makeText(listMilkFragment, "Updated!", Toast.LENGTH_SHORT).show();
+
+                            //reload the database to view
+                            sqliteHelper.Grand_Total = 0;
+                            listMilkFragment.reloadingDatabase();
+                        }
                     }
                 });
 
