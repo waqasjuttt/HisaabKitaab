@@ -37,9 +37,9 @@ public class AddDailMilk_Fragment extends Fragment implements View.OnClickListen
     protected static int mMonth;
     protected static int mDay;
     static String strDate = "null";
-    static String aTime;
 
     //For Time
+    static String aTime;
     private int hr;
     private int min;
     static final int TIME_DIALOG_ID = 1111;
@@ -94,10 +94,11 @@ public class AddDailMilk_Fragment extends Fragment implements View.OnClickListen
 
     private void setListners() {
         btnSave.setOnClickListener(this);
+
         Date today = new Date();
         SimpleDateFormat simpleDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         strDate = simpleDate.format(today);
-        tv_Date.setText("Date: " + strDate);
+        tv_Date.setText("تاریخ: " + strDate);
         tv_Date.setOnClickListener(this);
 
         //For Time
@@ -239,7 +240,7 @@ public class AddDailMilk_Fragment extends Fragment implements View.OnClickListen
             minutes = String.valueOf(mins);
 
         aTime = new StringBuilder().append(hours).append(':').append(minutes).append(" ").append(timeSet).toString();
-        tv_Time.setText("Time: " + aTime);
+        tv_Time.setText("وقت: " + aTime);
     }
 
     /////////////////////////////////////////////////////////// For Date /////////////////////////////////////////////////////////////////////////////////////////////////

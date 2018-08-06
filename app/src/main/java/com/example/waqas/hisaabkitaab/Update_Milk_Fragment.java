@@ -73,7 +73,6 @@ public class Update_Milk_Fragment extends Fragment implements View.OnClickListen
         tv_PerKG = (TextView) view.findViewById(R.id.tv_PerKG);
         tv_Total = (TextView) view.findViewById(R.id.tv_TotalMilkPrice);
         btnSave = (Button) view.findViewById(R.id.btn_Save);
-        btn_Time = (Button) view.findViewById(R.id.btnTime);
         Milk_Quantity = (Spinner) view.findViewById(R.id.MilkQuantity);
         linearLayout = (LinearLayout) view.findViewById(R.id.linearLayout);
 

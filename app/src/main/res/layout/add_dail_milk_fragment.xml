@@ -177,19 +177,20 @@
                 android:id="@+id/tv_DatePicker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/Margin_20dp"
+                android:layout_gravity="center"
                 android:layout_weight="10"
-                android:text="Date"
+                android:gravity="center"
+                android:text="تاریخ درج کریں"
                 android:textSize="@dimen/TextSize_16sp" />
 
             <TextView
                 android:id="@+id/tv_Time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="20dp"
+                android:layout_gravity="center"
                 android:layout_weight="10"
-                android:text="Time"
+                android:gravity="center"
+                android:text="وقت درج کریں"
                 android:textSize="@dimen/TextSize_16sp" />
         </LinearLayout>
 
