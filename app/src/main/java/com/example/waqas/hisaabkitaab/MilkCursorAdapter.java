@@ -5,9 +5,12 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -25,13 +29,15 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
     private List_Milk_Fragment listMilkFragment;
     private Context context;
     private SqliteHelper sqliteHelper;
-    private List<Milk_Items> milk_itemses;
+    private ArrayList<Milk_Items> milk_itemses;
 
-    public MilkCursorAdapter(List_Milk_Fragment list_milk_fragment, int resource, List<Milk_Items> objects, SqliteHelper helper) {
+    public MilkCursorAdapter(List_Milk_Fragment list_milk_fragment, int resource, ArrayList<Milk_Items> objects, SqliteHelper helper) {
         super(list_milk_fragment, resource, objects);
         this.listMilkFragment = list_milk_fragment;
         this.sqliteHelper = helper;
         this.milk_itemses = objects;
+        listMilkFragment.et_Search.setFocusable(true);
+        listMilkFragment.et_Search.setFocusableInTouchMode(true);
     }
 
     @Override
@@ -56,7 +62,7 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
         holder.tv_date.setText(getItem(position).getDateNTime());
         holder.tv_KG.setText(getItem(position).getMilk_Quantity() + " کلو");
 
-        int number = Integer.parseInt(String.valueOf(getItem(position).getTotal_Milk()));
+        final int number = Integer.parseInt(String.valueOf(getItem(position).getTotal_Milk()));
         NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
         String result = numberFormat.format(number);
 
@@ -78,6 +84,8 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
                 btn_yes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        listMilkFragment.et_Search.setFocusable(false);
+                        listMilkFragment.et_Search.setFocusableInTouchMode(false);
 
                         sqliteHelper.deleteMilkData(getItem(position)); //delete in db
                         Toast.makeText(listMilkFragment, "ختم ہوچکا ہے!", Toast.LENGTH_LONG).show();
@@ -93,6 +101,8 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
                 btn_no.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        listMilkFragment.et_Search.setFocusable(false);
+                        listMilkFragment.et_Search.setFocusableInTouchMode(false);
                         dialog.dismiss();
                     }
 
@@ -106,17 +116,19 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
             public void onClick(final View view) {
                 final AlertDialog.Builder alertDialog = new AlertDialog.Builder(listMilkFragment);
                 alertDialog.setTitle("Update Milk's Quantity");
-
                 final LinearLayout layout = new LinearLayout(listMilkFragment);
                 layout.setPadding(10, 10, 10, 10);
                 layout.setOrientation(LinearLayout.VERTICAL);
 
-                final EditText milk_quantity = new EditText(listMilkFragment);
-                milk_quantity.setHint("Milk Quantity");
-                layout.addView(milk_quantity);
+                final EditText et_milk_quantity = new EditText(listMilkFragment);
+                et_milk_quantity.setInputType(InputType.TYPE_CLASS_NUMBER);
+                et_milk_quantity.setFocusable(true);
+                et_milk_quantity.setFocusableInTouchMode(true);
+                et_milk_quantity.setHint("Milk Quantity");
+                layout.addView(et_milk_quantity);
 
-                milk_quantity.setText(getItem(position).getMilk_Quantity());
-//                jobBox.setText(getItem(position).get());
+                et_milk_quantity.setText(getItem(position).getMilk_Quantity());
+                et_milk_quantity.setSelection(getItem(position).getMilk_Quantity().toString().length());
 
                 alertDialog.setView(layout);
 
@@ -124,14 +136,15 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
-                        int value = Integer.parseInt(milk_quantity.getText().toString());
+                        listMilkFragment.et_Search.setFocusable(false);
+                        listMilkFragment.et_Search.setFocusableInTouchMode(false);
+                        int value = Integer.parseInt(et_milk_quantity.getText().toString());
                         if (value > 15) {
                             Toast.makeText(getContext(), "دودھ کی مقدار 1 سے 15 تک ہونی چاہی", Toast.LENGTH_SHORT).show();
                         } else {
-                            int total = Integer.parseInt(milk_quantity.getText().toString());
+                            int total = Integer.parseInt(et_milk_quantity.getText().toString());
                             total = total * 75;
-                            Milk_Items milkItems = new Milk_Items((getItem(position).getDateNTime()), milk_quantity.getText().toString(), total);
+                            Milk_Items milkItems = new Milk_Items((getItem(position).getDateNTime()), et_milk_quantity.getText().toString(), total);
                             milkItems.setID(getItem(position).getID());
                             sqliteHelper.updateMilkData(milkItems); //update to db
                             Toast.makeText(listMilkFragment, "Updated!", Toast.LENGTH_SHORT).show();
@@ -143,14 +156,29 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
                     }
                 });
 
-                alertDialog.setNegativeButton("Cancel", null);
+                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        listMilkFragment.et_Search.setFocusable(false);
+                        listMilkFragment.et_Search.setFocusableInTouchMode(false);
+                    }
+                });
 
                 //show alert dialog
                 alertDialog.show();
             }
         });
 
+        listMilkFragment.et_Search.setFocusable(true);
+        listMilkFragment.et_Search.setFocusableInTouchMode(true);
+
         return convertView;
+    }
+
+    public void setFilter(List<Milk_Items> listitem) {
+        milk_itemses = new ArrayList<>();
+        milk_itemses.addAll(listitem);
+        notifyDataSetChanged();
     }
 
     private static class ViewHolder {

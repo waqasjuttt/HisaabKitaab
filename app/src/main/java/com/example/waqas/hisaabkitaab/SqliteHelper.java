@@ -16,7 +16,6 @@ public class SqliteHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "milkdb.db";
     private Context ctx;
     int Grand_Total = 0;
-    List<String> stringArray = new ArrayList<>();
     private static final int VERSION = 1;
     public static final String TABLE_NAME = "milk_table";
     public static final String KEY_ID = "id";
@@ -43,7 +42,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // Add New Data in Database
+    // Add New Data into the Database
     public void add_Milk(Milk_Items milk_items) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -57,9 +56,23 @@ public class SqliteHelper extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
-    // Getting All Milk Data in Table of Database
-    public List<Milk_Items> getAllData() {
-        List<Milk_Items> milk_items = new ArrayList<>();
+    ////////////////////////////////////////// Check Date Already Exist or Not //////////////////////////////////////////////////////////////////
+    public boolean checkDate(String date) {
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME + " WHERE " + KEY_DATE_N_TIME + " LIKE '" + date + "%'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        int cursorCount = cursor.getCount();
+        cursor.close();
+        db.close();
+        if (cursorCount > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    ////////////////////////////////////////// Getting All Milk Data in Table of Database ///////////////////////////////////////////////////////
+    public ArrayList<Milk_Items> getAllData() {
+        ArrayList<Milk_Items> milk_items = new ArrayList<>();
         // select query
         String selectQuery = "SELECT  * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -79,27 +92,23 @@ public class SqliteHelper extends SQLiteOpenHelper {
                 milk_items.add(milk_items1);
             } while (cursor.moveToNext());
         }
-//        Toast.makeText(ctx, "Total Price: " + String.valueOf(Grand_Total), Toast.LENGTH_SHORT).show();
+        cursor.close();
+        db.close();
 
         return milk_items;
     }
 
-    public int getSum() {
-        // select query
-        String selectQuery = "SELECT  * FROM " + TABLE_NAME;
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        // looping through all table records and adding to list
-        if (cursor.moveToFirst()) {
-            while (cursor.moveToNext()) {
-                Grand_Total = Integer.parseInt(cursor.getString(2)) + Grand_Total;
-            }
-        }
-        Toast.makeText(ctx, "Total Price: " + String.valueOf(Grand_Total), Toast.LENGTH_LONG).show();
-        return Grand_Total;
-    }
+//        String date = cursor.getString(cursor.getColumnIndexOrThrow(KEY_DATE_N_TIME));
+//        String price = cursor.getString(cursor.getColumnIndexOrThrow(KEY_TOTAL_PRICE));
+//        String milk_kg = cursor.getString(cursor.getColumnIndexOrThrow(KEY_MILK_KG));
+//        list.add(date.toString().substring(0, 10) + " | " + milk_kg + " | " + price);
+//
+//        String[] str = new String[list.size()];
+//        for (int i = 0; i < list.size(); i++) {
+//            str[i] = list.get(i).toString();
 
-    // Deleting a record in database table
+    ////////////////////////////////////////// Deleting a record in database table //////////////////////////////////////////////////////////////
+
     public void deleteMilkData(Milk_Items milk_items) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, KEY_ID + " = ?", new String[]{String.valueOf(milk_items.getID())});

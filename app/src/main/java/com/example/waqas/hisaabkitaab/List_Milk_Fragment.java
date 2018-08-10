@@ -1,19 +1,32 @@
 package com.example.waqas.hisaabkitaab;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -22,6 +35,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.sdsmdg.tastytoast.TastyToast;
 import com.weiwangcn.betterspinner.library.BetterSpinner;
 
@@ -43,7 +57,7 @@ public class List_Milk_Fragment extends AppCompatActivity {
     static String strDate = "null";
 
     //For Time
-    static String aTime;
+    static String aTime = "null";
     private int hr;
     private int min;
     static final int TIME_DIALOG_ID = 1111;
@@ -51,9 +65,11 @@ public class List_Milk_Fragment extends AppCompatActivity {
     int d, m, y;
 
     private Dialog MyDialogForMilk;
-    Milk_Items milk_items;
+    EditText et_Search;
+    View View_UnderLine;
+    LinearLayout btnClose;
     ListView listView;
-    List<Milk_Items> milk_items_list;
+    ArrayList<Milk_Items> milk_items_list;
     TextView tv_Grand_Total_Price, tv_Per_KG, tv_Total;
     static TextView tv_date, tv_time;
     Button btnAdd, btnSave;
@@ -75,6 +91,7 @@ public class List_Milk_Fragment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_milk_fragment);
+
         initComponents();
         setListners();
     }
@@ -83,6 +100,10 @@ public class List_Milk_Fragment extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listView);
         tv_Grand_Total_Price = (TextView) findViewById(R.id.tv_Grand_Total_Price);
         btnAdd = (Button) findViewById(R.id.btn_Add_Extra_Milk);
+
+        et_Search = (EditText) findViewById(R.id.et_Search);
+        View_UnderLine = (View) findViewById(R.id.View_UnderLine);
+        btnClose = (LinearLayout) findViewById(R.id.btnClose);
 
         sqliteHelper = new SqliteHelper(this);
         milk_items_list = new ArrayList<>();
@@ -104,13 +125,42 @@ public class List_Milk_Fragment extends AppCompatActivity {
 
     private void setListners() {
         reloadingDatabase();
-
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MyCustomAlertDialog();
             }
         });
+
+        et_Search.addTextChangedListener(textWatcher);
+        et_Search.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                et_Search.setText("");
+            }
+        });
+
+        listView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard(v);
+                return false;
+            }
+        });
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     public void MyCustomAlertDialog() {
@@ -130,8 +180,6 @@ public class List_Milk_Fragment extends AppCompatActivity {
 
         sqliteHelper = new SqliteHelper(this);
         list_milk_fragment = new List_Milk_Fragment();
-
-        Toast.makeText(List_Milk_Fragment.this, String.valueOf(tv_time.getText().toString()), Toast.LENGTH_SHORT).show();
 
         adapter_Milk_Quantity = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, str_Milk_Quantity) {
             @Override
@@ -205,7 +253,7 @@ public class List_Milk_Fragment extends AppCompatActivity {
                 String DateNTime = "null", Per_KG;
                 int Total;
 
-                if (!strDate.toString().contains("null")) {
+                if (!strDate.toString().contains("null") && !aTime.toString().contains("null")) {
                     DateNTime = strDate + " " + aTime.toString();
                 }
 
@@ -216,9 +264,12 @@ public class List_Milk_Fragment extends AppCompatActivity {
                     TastyToast.makeText(List_Milk_Fragment.this, "دودھ کی مقدار سلکٹ کریں!", Toast.LENGTH_SHORT, TastyToast.ERROR).show();
                 } else if (tv_date.getText().toString().contains("تاریخ درج کریں")) {
                     TastyToast.makeText(List_Milk_Fragment.this, "آپ نے تاریخ سلکٹ نہیں کی!", Toast.LENGTH_SHORT, TastyToast.ERROR).show();
+                } else if (sqliteHelper.checkDate(strDate.toString().trim())) {
+                    TastyToast.makeText(List_Milk_Fragment.this, "تاریخ پہلے سے مجود ہے!", Toast.LENGTH_SHORT, TastyToast.ERROR).show();
                 } else if (tv_time.getText().toString().contains("وقت درج کریں")) {
                     TastyToast.makeText(List_Milk_Fragment.this, "آپ نے وقت سلکٹ نہیں کیا!", Toast.LENGTH_SHORT, TastyToast.ERROR).show();
                 } else if (per_kg_value != 0
+                        && !sqliteHelper.checkDate(strDate.toString().trim())
                         && !tv_date.getText().toString().contains("تاریخ درج کریں")
                         && !tv_time.getText().toString().contains("وقت درج کریں")) {
                     Milk_Items milk_items = new Milk_Items(DateNTime, Per_KG, Total);
@@ -278,7 +329,7 @@ public class List_Milk_Fragment extends AppCompatActivity {
             minutes = String.valueOf(mins);
 
         aTime = new StringBuilder().append(hours).append(':').append(minutes).append(" ").append(timeSet).toString();
-        tv_time.setText("وقت: " + aTime);
+        tv_time.setText("Time: " + aTime);
     }
 
     /////////////////////////////////////////////////////////// For Date /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -323,4 +374,31 @@ public class List_Milk_Fragment extends AppCompatActivity {
             tv_date.setText("Date: " + strDate);
         }
     }
+
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (s.toString().length() > 0) {
+                if (et_Search.getText().toString().length() > 0) {
+                    btnClose.setVisibility(View.VISIBLE);
+                    View_UnderLine.setBackgroundColor(Color.parseColor("#fa7676"));
+                } else if (et_Search.getText().toString().length() == 0) {
+                    btnClose.setVisibility(View.GONE);
+                    View_UnderLine.setBackgroundColor(Color.parseColor("#969696"));
+                }
+            } else if (s.toString().length() == 0) {
+                btnClose.setVisibility(View.GONE);
+                View_UnderLine.setBackgroundColor(Color.parseColor("#969696"));
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+        }
+    };
 }

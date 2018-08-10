@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -98,7 +100,7 @@ public class AddDailMilk_Fragment extends Fragment implements View.OnClickListen
         Date today = new Date();
         SimpleDateFormat simpleDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         strDate = simpleDate.format(today);
-        tv_Date.setText("تاریخ: " + strDate);
+        tv_Date.setText("Date: " + strDate);
         tv_Date.setOnClickListener(this);
 
         //For Time
@@ -191,7 +193,14 @@ public class AddDailMilk_Fragment extends Fragment implements View.OnClickListen
             TastyToast.makeText(getActivity(), "دودھ کی مقدار سلکٹ کریں!", Toast.LENGTH_SHORT, TastyToast.ERROR).show();
         } else if (tv_Time.getText().toString().isEmpty()) {
             TastyToast.makeText(getActivity(), "آپ نے وقت سلکٹ نہیں کیا!", Toast.LENGTH_SHORT, TastyToast.ERROR).show();
-        } else if (per_kg_value != 0 && !DateNTime.toString().isEmpty()) {
+        } else if (sqliteHelper.checkDate(strDate.toString().trim())) {
+            Snackbar snackbar = Snackbar
+                    .make(view, "تاریخ پہلے سے مجود ہے!", Snackbar.LENGTH_LONG);
+            snackbar.show();
+        } else if (per_kg_value != 0
+                && !DateNTime.toString().isEmpty()
+                && !sqliteHelper.checkDate(strDate.toString().trim())) {
+
             Milk_Items milk_items = new Milk_Items(DateNTime, Per_KG, Total);
             sqliteHelper.add_Milk(milk_items);
             fragmentManager
@@ -240,7 +249,7 @@ public class AddDailMilk_Fragment extends Fragment implements View.OnClickListen
             minutes = String.valueOf(mins);
 
         aTime = new StringBuilder().append(hours).append(':').append(minutes).append(" ").append(timeSet).toString();
-        tv_Time.setText("وقت: " + aTime);
+        tv_Time.setText("Time: " + aTime);
     }
 
     /////////////////////////////////////////////////////////// For Date /////////////////////////////////////////////////////////////////////////////////////////////////

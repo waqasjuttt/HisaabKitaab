@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="RoundColor">#0044fd</color>
+    <color name="whhite">#ffffff</color>
+    <color name="Under_Line">#fa7676</color>
+    <color name="Under_Line_Main">#969696</color>
 </resources>

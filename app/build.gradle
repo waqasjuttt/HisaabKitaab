@@ -27,7 +27,8 @@ dependencies {
     })
 
     //Add Libraries
-    //compile 'com.android.support:design:26.1.0'
+    compile 'com.android.support:design:25.1.1'
+    compile 'com.miguelcatalan:materialsearchview:1.4.0'
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.weiwangcn.betterspinner:library:1.1.0'

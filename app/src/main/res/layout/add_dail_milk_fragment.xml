@@ -73,7 +73,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="دودھ" />
+                    android:text="دودھ"
+                    android:textColor="#000000" />
 
                 <View
                     android:layout_width="match_parent"
@@ -88,7 +89,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
-                    android:text="0 کلو" />
+                    android:text="0 کلو"
+                    android:textColor="#000000" />
 
             </LinearLayout>
 
@@ -107,7 +109,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="فی قیمت" />
+                    android:text="فی قیمت"
+                    android:textColor="#000000" />
 
                 <View
                     android:layout_width="match_parent"
@@ -121,7 +124,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
-                    android:text="75روپے" />
+                    android:text="75روپے"
+                    android:textColor="#000000" />
 
             </LinearLayout>
 
@@ -140,7 +144,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="ٹوٹل قیمت" />
+                    android:text="ٹوٹل قیمت"
+                    android:textColor="#000000" />
 
                 <View
                     android:layout_width="match_parent"
@@ -155,7 +160,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
-                    android:text="0روپے" />
+                    android:text="0روپے"
+                    android:textColor="#000000" />
 
             </LinearLayout>
         </LinearLayout>
@@ -181,6 +187,7 @@
                 android:layout_weight="10"
                 android:gravity="center"
                 android:text="تاریخ درج کریں"
+                android:textColor="#000000"
                 android:textSize="@dimen/TextSize_16sp" />
 
             <TextView
@@ -191,6 +198,7 @@
                 android:layout_weight="10"
                 android:gravity="center"
                 android:text="وقت درج کریں"
+                android:textColor="#000000"
                 android:textSize="@dimen/TextSize_16sp" />
         </LinearLayout>
 
