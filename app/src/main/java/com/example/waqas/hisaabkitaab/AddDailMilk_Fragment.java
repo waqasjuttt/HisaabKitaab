@@ -184,7 +184,7 @@ public class AddDailMilk_Fragment extends Fragment implements View.OnClickListen
         int Total;
 
         if (!strDate.toString().contains("null")) {
-            DateNTime = strDate + " " + aTime.toString();
+            DateNTime = strDate + "\n" + aTime.toString();
         }
         Per_KG = String.valueOf(per_kg_value);
         Total = per_kg_value * 75;

@@ -1,6 +1,6 @@
 package com.example.waqas.hisaabkitaab;
 
-public class Milk_Items {
+public class Milk_Items{
 
     private int ID;
     private String DateNTime;

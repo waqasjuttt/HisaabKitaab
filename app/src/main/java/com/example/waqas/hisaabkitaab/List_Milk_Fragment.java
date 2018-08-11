@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.MenuItemCompat;
@@ -62,15 +63,13 @@ public class List_Milk_Fragment extends AppCompatActivity {
     private int min;
     static final int TIME_DIALOG_ID = 1111;
 
-    int d, m, y;
-
     private Dialog MyDialogForMilk;
-    EditText et_Search;
-    View View_UnderLine;
-    LinearLayout btnClose;
+    //    EditText et_Search;
+//    View View_UnderLine;
+//    LinearLayout btnClose;
     ListView listView;
     ArrayList<Milk_Items> milk_items_list;
-    TextView tv_Grand_Total_Price, tv_Per_KG, tv_Total;
+    TextView tv_Grand_Total_Price, tv_Per_KG, tv_Total, tv_Total_Days;
     static TextView tv_date, tv_time;
     Button btnAdd, btnSave;
     private Button btn_Cancel;
@@ -100,10 +99,11 @@ public class List_Milk_Fragment extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listView);
         tv_Grand_Total_Price = (TextView) findViewById(R.id.tv_Grand_Total_Price);
         btnAdd = (Button) findViewById(R.id.btn_Add_Extra_Milk);
+        tv_Total_Days = (TextView) findViewById(R.id.tv_Total_Days);
 
-        et_Search = (EditText) findViewById(R.id.et_Search);
-        View_UnderLine = (View) findViewById(R.id.View_UnderLine);
-        btnClose = (LinearLayout) findViewById(R.id.btnClose);
+//        et_Search = (EditText) findViewById(R.id.et_Search);
+//        View_UnderLine = (View) findViewById(R.id.View_UnderLine);
+//        btnClose = (LinearLayout) findViewById(R.id.btnClose);
 
         sqliteHelper = new SqliteHelper(this);
         milk_items_list = new ArrayList<>();
@@ -120,7 +120,10 @@ public class List_Milk_Fragment extends AppCompatActivity {
         int number = Integer.parseInt(String.valueOf(sqliteHelper.Grand_Total));
         NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
         String result = numberFormat.format(number);
+        tv_Grand_Total_Price.setPaintFlags(tv_Grand_Total_Price.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         tv_Grand_Total_Price.setText("ٹوٹل بل: " + result);
+        tv_Total_Days.setPaintFlags(tv_Total_Days.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        tv_Total_Days.setText("ٹوٹل دن: " + String.valueOf(listView.getAdapter().getCount()));
     }
 
     private void setListners() {
@@ -132,22 +135,22 @@ public class List_Milk_Fragment extends AppCompatActivity {
             }
         });
 
-        et_Search.addTextChangedListener(textWatcher);
-        et_Search.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    hideKeyboard(v);
-                }
-            }
-        });
-
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                et_Search.setText("");
-            }
-        });
+//        et_Search.addTextChangedListener(textWatcher);
+//        et_Search.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (!hasFocus) {
+//                    hideKeyboard(v);
+//                }
+//            }
+//        });
+//
+//        btnClose.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                et_Search.setText("");
+//            }
+//        });
 
         listView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -254,7 +257,7 @@ public class List_Milk_Fragment extends AppCompatActivity {
                 int Total;
 
                 if (!strDate.toString().contains("null") && !aTime.toString().contains("null")) {
-                    DateNTime = strDate + " " + aTime.toString();
+                    DateNTime = strDate + "\n" + aTime.toString();
                 }
 
                 Per_KG = String.valueOf(per_kg_value);
@@ -375,30 +378,25 @@ public class List_Milk_Fragment extends AppCompatActivity {
         }
     }
 
-    private TextWatcher textWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (s.toString().length() > 0) {
-                if (et_Search.getText().toString().length() > 0) {
-                    btnClose.setVisibility(View.VISIBLE);
-                    View_UnderLine.setBackgroundColor(Color.parseColor("#fa7676"));
-                } else if (et_Search.getText().toString().length() == 0) {
-                    btnClose.setVisibility(View.GONE);
-                    View_UnderLine.setBackgroundColor(Color.parseColor("#969696"));
-                }
-            } else if (s.toString().length() == 0) {
-                btnClose.setVisibility(View.GONE);
-                View_UnderLine.setBackgroundColor(Color.parseColor("#969696"));
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-        }
-    };
+//    private TextWatcher textWatcher = new TextWatcher() {
+//        @Override
+//        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//        }
+//
+//        @Override
+//        public void onTextChanged(CharSequence s, int start, int before, int count) {
+//            if (s.toString().length() > 0) {
+//                btnClose.setVisibility(View.VISIBLE);
+//                View_UnderLine.setBackgroundColor(Color.parseColor("#fa7676"));
+//            } else if (s.toString().length() == 0) {
+//                btnClose.setVisibility(View.GONE);
+//                View_UnderLine.setBackgroundColor(Color.parseColor("#969696"));
+//            }
+//        }
+//
+//        @Override
+//        public void afterTextChanged(Editable s) {
+//        }
+//    };
 }

@@ -74,7 +74,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
     public ArrayList<Milk_Items> getAllData() {
         ArrayList<Milk_Items> milk_items = new ArrayList<>();
         // select query
-        String selectQuery = "SELECT  * FROM " + TABLE_NAME;
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME + " ORDER BY " + KEY_DATE_N_TIME;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -85,7 +85,12 @@ public class SqliteHelper extends SQLiteOpenHelper {
                 milk_items1.setID(Integer.parseInt(cursor.getString(0)));
                 milk_items1.setMilk_Quantity(cursor.getString(1));
                 milk_items1.setTotal_Milk(cursor.getInt(2));
-                milk_items1.setDateNTime(cursor.getString(3));
+                if (cursor.getString(3).toString().startsWith("0")) {
+                    String s = cursor.getString(3).toString().replaceFirst("0", "");
+                    milk_items1.setDateNTime(s);
+                } else {
+                    milk_items1.setDateNTime(cursor.getString(3));
+                }
 
                 Grand_Total = Integer.parseInt(cursor.getString(2)) + Grand_Total;
                 // Adding milk_items1 to list

@@ -9,71 +9,71 @@
     android:orientation="vertical"
     tools:context="com.example.waqas.hisaabkitaab.List_Milk_Fragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="3dp"
-        android:background="@drawable/search_background"
-        android:orientation="horizontal">
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="10dp"-->
+    <!--android:layout_marginRight="10dp"-->
+    <!--android:layout_marginTop="3dp"-->
+    <!--android:background="@drawable/search_background"-->
+    <!--android:orientation="horizontal">-->
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
-            android:src="@drawable/search_red" />
+    <!--<ImageView-->
+    <!--android:layout_width="20dp"-->
+    <!--android:layout_height="20dp"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:src="@drawable/search_red" />-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical">-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="10">
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:weightSum="10">-->
 
-                <EditText
-                    android:id="@+id/et_Search"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="9"
-                    android:background="@null"
-                    android:gravity="left"
-                    android:hint="Search by city"
-                    android:inputType="date"
-                    android:padding="5dp" />
+    <!--<EditText-->
+    <!--android:id="@+id/et_Search"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_marginLeft="5dp"-->
+    <!--android:layout_weight="9"-->
+    <!--android:background="@null"-->
+    <!--android:gravity="left"-->
+    <!--android:hint="Search by city"-->
+    <!--android:inputType="date"-->
+    <!--android:padding="5dp" />-->
 
-                <LinearLayout
-                    android:id="@+id/btnClose"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:visibility="gone">
+    <!--<LinearLayout-->
+    <!--android:id="@+id/btnClose"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:visibility="gone">-->
 
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/close_black" />
-                </LinearLayout>
-            </LinearLayout>
+    <!--<ImageView-->
+    <!--android:layout_width="25dp"-->
+    <!--android:layout_height="25dp"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:src="@drawable/close_black" />-->
+    <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
 
-            <View
-                android:id="@+id/View_UnderLine"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="2dp"
-                android:background="#969696" />
-        </LinearLayout>
-    </LinearLayout>
+    <!--<View-->
+    <!--android:id="@+id/View_UnderLine"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:layout_marginLeft="10dp"-->
+    <!--android:layout_marginTop="2dp"-->
+    <!--android:background="#969696" />-->
+    <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -85,17 +85,37 @@
         android:orientation="horizontal"
         android:weightSum="10">
 
-        <TextView
-            android:id="@+id/tv_Grand_Total_Price"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
+            android:layout_gravity="center"
             android:layout_weight="5"
-            android:gravity="center"
-            android:text="Grand Total Price"
-            android:textColor="#f00"
-            android:textSize="@dimen/TextSize_16sp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_Grand_Total_Price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="3dp"
+                android:gravity="center"
+                android:text="Grand Total Price"
+                android:textColor="#f00"
+                android:textSize="@dimen/TextSize_16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_Total_Days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="3dp"
+                android:gravity="center"
+                android:text="Total Days"
+                android:textColor="#0000ff"
+                android:textSize="@dimen/TextSize_16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/btn_Add_Extra_Milk"
