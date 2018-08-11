@@ -71,7 +71,7 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> implements Filte
             @Override
             public void onClick(View view) {
 
-                final Dialog dialog = new Dialog(listMilkFragment);
+                final Dialog dialog = new Dialog(getContext());
                 dialog.setContentView(R.layout.delete_warning_layout);
                 dialog.setCancelable(false);
                 dialog.show();
@@ -86,7 +86,7 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> implements Filte
 //                        listMilkFragment.et_Search.setFocusableInTouchMode(false);
 
                         sqliteHelper.deleteMilkData(getItem(position)); //delete in db
-                        Toast.makeText(listMilkFragment, "ختم ہوچکا ہے!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "ختم ہوچکا ہے!", Toast.LENGTH_LONG).show();
 
                         //reload the database to view
                         sqliteHelper.Grand_Total = 0;
@@ -112,13 +112,13 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> implements Filte
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(listMilkFragment);
+                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
                 alertDialog.setTitle("Update Milk's Quantity");
-                final LinearLayout layout = new LinearLayout(listMilkFragment);
+                final LinearLayout layout = new LinearLayout(getContext());
                 layout.setPadding(10, 10, 10, 10);
                 layout.setOrientation(LinearLayout.VERTICAL);
 
-                final EditText et_milk_quantity = new EditText(listMilkFragment);
+                final EditText et_milk_quantity = new EditText(getContext());
                 et_milk_quantity.setInputType(InputType.TYPE_CLASS_NUMBER);
                 et_milk_quantity.setFocusable(true);
                 et_milk_quantity.setFocusableInTouchMode(true);
@@ -143,7 +143,7 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> implements Filte
                             Milk_Items milkItems = new Milk_Items((getItem(position).getDateNTime()), et_milk_quantity.getText().toString(), total);
                             milkItems.setID(getItem(position).getID());
                             sqliteHelper.updateMilkData(milkItems); //update to db
-                            Toast.makeText(listMilkFragment, "Updated!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Updated!", Toast.LENGTH_SHORT).show();
 
                             //reload the database to view
                             sqliteHelper.Grand_Total = 0;
