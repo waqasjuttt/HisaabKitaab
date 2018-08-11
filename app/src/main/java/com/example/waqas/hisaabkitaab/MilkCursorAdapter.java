@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> implements Filterable {
+public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
 
     private Button btn_yes, btn_no;
     private List_Milk_Fragment listMilkFragment;
