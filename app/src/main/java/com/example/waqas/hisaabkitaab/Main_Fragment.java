@@ -64,8 +64,12 @@ public class Main_Fragment extends Fragment {
                             .replace(R.id.container, new AddDailMilk_Fragment());
                     fragmentTransaction.addToBackStack(null).commit();
                 } else if (position == 1) {
-                    Intent intent = new Intent(getActivity(), List_Milk_Fragment.class);
-                    startActivity(intent);
+                    fragmentTransaction = fragmentManager
+                            .beginTransaction()
+                            .replace(R.id.container, new List_Milk_Fragment());
+                    fragmentTransaction.addToBackStack(null).commit();
+//                    Intent intent = new Intent(getActivity(), List_Milk_Fragment.class);
+//                    startActivity(intent);
                 }
             }
         });

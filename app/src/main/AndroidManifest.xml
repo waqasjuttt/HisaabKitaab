@@ -16,7 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".List_Milk_Fragment" />
+        <!--<activity android:name=".List_Milk_Fragment" />-->
         <!--android:theme="@style/AppTheme.NoActionBar">-->
         <!--<meta-data-->
         <!--android:name="android.support.PARENT_ACTIVITY"-->

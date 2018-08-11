@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,14 +28,16 @@ import java.util.Locale;
 public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
 
     private Button btn_yes, btn_no;
-    private List_Milk_Fragment listMilkFragment;
+    //    private List_Milk_Fragment listMilkFragment;
     private Context context;
     private SqliteHelper sqliteHelper;
+    FragmentManager fragmentManager;
     List<Milk_Items> milk_itemses;
 
-    public MilkCursorAdapter(List_Milk_Fragment list_milk_fragment, int resource, List<Milk_Items> objects, SqliteHelper helper) {
-        super(list_milk_fragment, resource, objects);
-        this.listMilkFragment = list_milk_fragment;
+    public MilkCursorAdapter(Context context, int resource, List<Milk_Items> objects, SqliteHelper helper) {
+        super(context, resource, objects);
+        fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+        this.context = context;
         this.sqliteHelper = helper;
         this.milk_itemses = objects;
     }
@@ -90,7 +94,10 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
 
                         //reload the database to view
                         sqliteHelper.Grand_Total = 0;
-                        listMilkFragment.reloadingDatabase();
+                        fragmentManager
+                                .beginTransaction()
+                                .replace(R.id.container, new List_Milk_Fragment())
+                                .commit();
                         dialog.dismiss();
                     }
 
@@ -147,7 +154,10 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
 
                             //reload the database to view
                             sqliteHelper.Grand_Total = 0;
-                            listMilkFragment.reloadingDatabase();
+                            fragmentManager
+                                    .beginTransaction()
+                                    .replace(R.id.container, new List_Milk_Fragment())
+                                    .commit();
                         }
                     }
                 });
