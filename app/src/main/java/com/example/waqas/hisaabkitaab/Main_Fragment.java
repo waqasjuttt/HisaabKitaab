@@ -53,10 +53,6 @@ public class Main_Fragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-//                Toast.makeText(
-//                        getActivity().getApplicationContext(),
-//                        ((TextView) v.findViewById(R.id.grid_item_label))
-//                                .getText(), Toast.LENGTH_SHORT).show();
 
                 if (position == 0) {
                     fragmentTransaction = fragmentManager
@@ -68,8 +64,6 @@ public class Main_Fragment extends Fragment {
                             .beginTransaction()
                             .replace(R.id.container, new List_Milk_Fragment());
                     fragmentTransaction.addToBackStack(null).commit();
-//                    Intent intent = new Intent(getActivity(), List_Milk_Fragment.class);
-//                    startActivity(intent);
                 }
             }
         });

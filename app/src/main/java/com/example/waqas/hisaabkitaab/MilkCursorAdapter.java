@@ -28,7 +28,6 @@ import java.util.Locale;
 public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
 
     private Button btn_yes, btn_no;
-    //    private List_Milk_Fragment listMilkFragment;
     private Context context;
     private SqliteHelper sqliteHelper;
     FragmentManager fragmentManager;
@@ -86,9 +85,6 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
                 btn_yes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-//                        listMilkFragment.et_Search.setFocusable(false);
-//                        listMilkFragment.et_Search.setFocusableInTouchMode(false);
-
                         sqliteHelper.deleteMilkData(getItem(position)); //delete in db
                         Toast.makeText(getContext(), "ختم ہوچکا ہے!", Toast.LENGTH_LONG).show();
 
@@ -105,10 +101,7 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
 
                 btn_no.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
-//                        listMilkFragment.et_Search.setFocusable(false);
-//                        listMilkFragment.et_Search.setFocusableInTouchMode(false);
-                        dialog.dismiss();
+                    public void onClick(View view) {dialog.dismiss();
                     }
 
                 });
