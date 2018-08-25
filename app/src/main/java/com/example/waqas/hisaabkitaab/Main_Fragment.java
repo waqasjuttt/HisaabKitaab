@@ -62,7 +62,7 @@ public class Main_Fragment extends Fragment {
                 } else if (position == 1) {
                     fragmentTransaction = fragmentManager
                             .beginTransaction()
-                            .replace(R.id.container, new List_Milk_Fragment());
+                            .replace(R.id.container, new Tablayout_Fragment());
                     fragmentTransaction.addToBackStack(null).commit();
                 }
             }

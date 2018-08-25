@@ -31,6 +31,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="5px"
             android:text="Blood"
+            android:textColor="#000"
             android:textSize="15sp"></TextView>
     </LinearLayout>
 

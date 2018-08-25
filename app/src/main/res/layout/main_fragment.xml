@@ -12,6 +12,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:textColor="#000"
             android:fontFamily="cursive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,7 +29,7 @@
             android:id="@+id/gridView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ffffff"
+            android:background="#e7d1d1"
             android:columnWidth="150dp"
             android:gravity="center"
             android:numColumns="auto_fit"></GridView>

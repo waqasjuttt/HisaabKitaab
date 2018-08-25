@@ -92,7 +92,7 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
                         sqliteHelper.Grand_Total = 0;
                         fragmentManager
                                 .beginTransaction()
-                                .replace(R.id.container, new List_Milk_Fragment())
+                                .replace(R.id.container, new Tablayout_Fragment())
                                 .commit();
                         dialog.dismiss();
                     }
@@ -101,7 +101,8 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
 
                 btn_no.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view) {dialog.dismiss();
+                    public void onClick(View view) {
+                        dialog.dismiss();
                     }
 
                 });
@@ -137,6 +138,10 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
                         int value = Integer.parseInt(et_milk_quantity.getText().toString());
                         if (value > 15) {
                             Toast.makeText(getContext(), "دودھ کی مقدار 1 سے 15 تک ہونی چاہی", Toast.LENGTH_SHORT).show();
+                            fragmentManager
+                                    .beginTransaction()
+                                    .replace(R.id.container, new Tablayout_Fragment())
+                                    .commit();
                         } else {
                             int total = Integer.parseInt(et_milk_quantity.getText().toString());
                             total = total * 75;
@@ -149,7 +154,7 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
                             sqliteHelper.Grand_Total = 0;
                             fragmentManager
                                     .beginTransaction()
-                                    .replace(R.id.container, new List_Milk_Fragment())
+                                    .replace(R.id.container, new Tablayout_Fragment())
                                     .commit();
                         }
                     }

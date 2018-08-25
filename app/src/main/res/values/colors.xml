@@ -8,4 +8,12 @@
     <color name="whhite">#ffffff</color>
     <color name="Under_Line">#fa7676</color>
     <color name="Under_Line_Main">#969696</color>
+    <color name="colorControlActivated">#ffff00</color>
+    <color name="colorControlHighlight">#c6ff00</color>
+    <color name="colorButtonNormal">#757575</color>
+    <color name="tabIndicatorColor">#FF5252</color>
+    <color name="white">#ffffff</color>
+    <color name="TabTextColor">#8c9297</color>
+    <color name="SelectedTabColor">#48494a</color>
+    <color name="backgroundColor">#f6fafb</color>
 </resources>

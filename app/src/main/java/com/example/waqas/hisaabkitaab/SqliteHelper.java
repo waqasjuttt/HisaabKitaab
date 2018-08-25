@@ -9,12 +9,14 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class SqliteHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "milkdb.db";
-    private Context ctx;
+    private static Context ctx;
     int Grand_Total = 0;
     private static final int VERSION = 1;
     public static final String TABLE_NAME = "milk_table";
@@ -103,14 +105,92 @@ public class SqliteHelper extends SQLiteOpenHelper {
         return milk_items;
     }
 
-//        String date = cursor.getString(cursor.getColumnIndexOrThrow(KEY_DATE_N_TIME));
-//        String price = cursor.getString(cursor.getColumnIndexOrThrow(KEY_TOTAL_PRICE));
-//        String milk_kg = cursor.getString(cursor.getColumnIndexOrThrow(KEY_MILK_KG));
-//        list.add(date.toString().substring(0, 10) + " | " + milk_kg + " | " + price);
-//
-//        String[] str = new String[list.size()];
+    public String[] getDates() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select " + KEY_DATE_N_TIME + " from " + TABLE_NAME + " ;", null);
+        ArrayList<String> list = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            String date = cursor.getString(cursor.getColumnIndexOrThrow(KEY_DATE_N_TIME));
+            list.add(date.toString().substring(2, 6));
+        }
+
+        Object[] st = list.toArray();
+        for (Object s : st) {
+            if (list.indexOf(s) != list.lastIndexOf(s)) {
+                list.remove(list.lastIndexOf(s));
+            }
+        }
+
+        String[] str = new String[list.size()];
+
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).toString().contains("-01-")) {
+                str[i] = list.get(i).toString().replace("-01-", "1");
+            } else if (list.get(i).toString().contains("-02-")) {
+                str[i] = list.get(i).toString().replace("-02-", "2");
+            } else if (list.get(i).toString().contains("-03-")) {
+                str[i] = list.get(i).toString().replace("-03-", "3");
+            } else if (list.get(i).toString().contains("-04-")) {
+                str[i] = list.get(i).toString().replace("-04-", "4");
+            } else if (list.get(i).toString().contains("-05-")) {
+                str[i] = list.get(i).toString().replace("-05-", "5");
+            } else if (list.get(i).toString().contains("-06-")) {
+                str[i] = list.get(i).toString().replace("-06-", "6");
+            } else if (list.get(i).toString().contains("-07-")) {
+                str[i] = list.get(i).toString().replace("-07-", "7");
+            } else if (list.get(i).toString().contains("-08-")) {
+                str[i] = list.get(i).toString().replace("-08-", "8");
+            } else if (list.get(i).toString().contains("-09-")) {
+                str[i] = list.get(i).toString().replace("-09-", "9");
+            } else if (list.get(i).toString().contains("-10-")) {
+                str[i] = list.get(i).toString().replace("-10-", "10");
+            } else if (list.get(i).toString().contains("-11-")) {
+                str[i] = list.get(i).toString().replace("-11-", "11");
+            } else if (list.get(i).toString().contains("-12-")) {
+                str[i] = list.get(i).toString().replace("-12-", "12");
+            }
+        }
+
+        int[] a = new int[str.length];
+        for (int i = 0; i < a.length; i++) {
+            a[i] = Integer.parseInt(str[i]);
+        }
+        Arrays.sort(a);
+
+        for (int i = 0; i < a.length; i++) {
+            str[i] = String.valueOf(a[i]);
+        }
+
 //        for (int i = 0; i < list.size(); i++) {
-//            str[i] = list.get(i).toString();
+//            if (list.get(i).toString().contains("-01-")) {
+//                str[i] = list.get(i).toString().replace("-01-", "Jan-");
+//            } else if (list.get(i).toString().contains("-02-")) {
+//                str[i] = list.get(i).toString().replace("-02-", "Feb-");
+//            } else if (list.get(i).toString().contains("-03-")) {
+//                str[i] = list.get(i).toString().replace("-03-", "Mar-");
+//            } else if (list.get(i).toString().contains("-04-")) {
+//                str[i] = list.get(i).toString().replace("-04-", "Apr-");
+//            } else if (list.get(i).toString().contains("-05-")) {
+//                str[i] = list.get(i).toString().replace("-05-", "May-");
+//            } else if (list.get(i).toString().contains("-06-")) {
+//                str[i] = list.get(i).toString().replace("-06-", "Jun-");
+//            } else if (list.get(i).toString().contains("-07-")) {
+//                str[i] = list.get(i).toString().replace("-07-", "Jul-");
+//            } else if (list.get(i).toString().contains("-08-")) {
+//                str[i] = list.get(i).toString().replace("-08-", "Aug-");
+//            } else if (list.get(i).toString().contains("-09-")) {
+//                str[i] = list.get(i).toString().replace("-09-", "Sep-");
+//            } else if (list.get(i).toString().contains("-10-")) {
+//                str[i] = list.get(i).toString().replace("-10-", "Oct-");
+//            } else if (list.get(i).toString().contains("-11-")) {
+//                str[i] = list.get(i).toString().replace("-11-", "Nov-");
+//            } else if (list.get(i).toString().contains("-12-")) {
+//                str[i] = list.get(i).toString().replace("-12-", "Dec-");
+//            }
+//        }
+
+        return str;
+    }
 
     ////////////////////////////////////////// Deleting a record in database table //////////////////////////////////////////////////////////////
 
