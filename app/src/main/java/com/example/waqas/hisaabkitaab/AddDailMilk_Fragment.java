@@ -91,7 +91,7 @@ public class AddDailMilk_Fragment extends Fragment implements View.OnClickListen
         linearLayout = (LinearLayout) view.findViewById(R.id.linearLayout);
 
         sqliteHelper = new SqliteHelper(getActivity());
-        list_milk_fragment = new List_Milk_Fragment();
+//        list_milk_fragment = new List_Milk_Fragment();
     }
 
     private void setListners() {

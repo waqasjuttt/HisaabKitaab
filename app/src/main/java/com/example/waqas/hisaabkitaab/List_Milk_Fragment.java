@@ -68,9 +68,10 @@ public class List_Milk_Fragment extends Fragment {
     private int per_kg_value;
     private View view;
     private FragmentManager fragmentManager;
+    String month;
 
-    public List_Milk_Fragment() {
-        // Required empty public constructor
+    public List_Milk_Fragment(String m) {
+        month = m;
     }
 
     @Override
@@ -99,7 +100,7 @@ public class List_Milk_Fragment extends Fragment {
     }
 
     public void reloadingDatabase() {
-        milk_items_list = sqliteHelper.getAllData();
+        milk_items_list = sqliteHelper.getAllDatabyMonth(month);
         if (milk_items_list.size() == 0) {
             Toast.makeText(getActivity(), "No record found in database!", Toast.LENGTH_SHORT).show();
         }
@@ -154,7 +155,7 @@ public class List_Milk_Fragment extends Fragment {
         linearLayout = (LinearLayout) MyDialogForMilk.findViewById(R.id.linearLayout);
 
         sqliteHelper = new SqliteHelper(getActivity());
-        list_milk_fragment = new List_Milk_Fragment();
+//        list_milk_fragment = new List_Milk_Fragment();
 
         adapter_Milk_Quantity = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, str_Milk_Quantity) {
             @Override
@@ -250,6 +251,10 @@ public class List_Milk_Fragment extends Fragment {
                     sqliteHelper.add_Milk(milk_items);
 
                     reloadingDatabase();
+                    fragmentManager
+                            .beginTransaction()
+                            .replace(R.id.container, new Tablayout_Fragment())
+                            .commit();
                     MyDialogForMilk.dismiss();
                 }
             }

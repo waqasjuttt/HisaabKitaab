@@ -69,30 +69,30 @@ public class Tablayout_Fragment extends Fragment {
         TablayoutAdapter adapter = new TablayoutAdapter(getActivity().getSupportFragmentManager());
         String[] str1 = sqliteHelper.getDates();
         for (String str : str1) {
-            if (str.toString().startsWith("1")) {
-                adapter.addFrag(new List_Milk_Fragment(), "Jan");
-            } else if (str.toString().startsWith("2")) {
-                adapter.addFrag(new List_Milk_Fragment(), "Feb");
-            } else if (str.toString().contains("3")) {
-                adapter.addFrag(new List_Milk_Fragment(), "Mar");
-            } else if (str.toString().contains("4")) {
-                adapter.addFrag(new List_Milk_Fragment(), "Apr");
-            } else if (str.toString().contains("5")) {
-                adapter.addFrag(new List_Milk_Fragment(), "May");
-            } else if (str.toString().contains("6")) {
-                adapter.addFrag(new List_Milk_Fragment(), "Jun");
-            } else if (str.toString().contains("7")) {
-                adapter.addFrag(new List_Milk_Fragment(), "Jul");
-            } else if (str.toString().contains("8")) {
-                adapter.addFrag(new List_Milk_Fragment(), "Aug");
-            } else if (str.toString().contains("9")) {
-                adapter.addFrag(new List_Milk_Fragment(), "Sep");
-            } else if (str.toString().contains("10")) {
-                adapter.addFrag(new List_Milk_Fragment(), "Oct");
-            } else if (str.toString().contains("11")) {
-                adapter.addFrag(new List_Milk_Fragment(), "Nov");
-            } else if (str.toString().contains("12")) {
-                adapter.addFrag(new List_Milk_Fragment(), "Dec");
+            if (str.toString().equals("1")) {
+                adapter.addFrag(new List_Milk_Fragment("-01-"), "Jan");
+            } else if (str.toString().equals("2")) {
+                adapter.addFrag(new List_Milk_Fragment("-02-"), "Feb");
+            } else if (str.toString().equals("3")) {
+                adapter.addFrag(new List_Milk_Fragment("-03-"), "Mar");
+            } else if (str.toString().equals("4")) {
+                adapter.addFrag(new List_Milk_Fragment("-04-"), "Apr");
+            } else if (str.toString().equals("5")) {
+                adapter.addFrag(new List_Milk_Fragment("-05-"), "May");
+            } else if (str.toString().equals("6")) {
+                adapter.addFrag(new List_Milk_Fragment("-06-"), "Jun");
+            } else if (str.toString().equals("7")) {
+                adapter.addFrag(new List_Milk_Fragment("-07-"), "Jul");
+            } else if (str.toString().equals("8")) {
+                adapter.addFrag(new List_Milk_Fragment("-08-"), "Aug");
+            } else if (str.toString().equals("9")) {
+                adapter.addFrag(new List_Milk_Fragment("-09-"), "Sep");
+            } else if (str.toString().equals("10")) {
+                adapter.addFrag(new List_Milk_Fragment("-10-"), "Oct");
+            } else if (str.toString().equals("11")) {
+                adapter.addFrag(new List_Milk_Fragment("-11-"), "Nov");
+            } else if (str.toString().equals("12")) {
+                adapter.addFrag(new List_Milk_Fragment("-12-"), "Dec");
             }
         }
         viewPager.setAdapter(adapter);

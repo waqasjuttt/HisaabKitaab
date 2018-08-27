@@ -60,7 +60,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
 
     ////////////////////////////////////////// Check Date Already Exist or Not //////////////////////////////////////////////////////////////////
     public boolean checkDate(String date) {
-        String selectQuery = "SELECT  * FROM " + TABLE_NAME + " WHERE " + KEY_DATE_N_TIME + " LIKE '" + date + "%'";
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_DATE_N_TIME + " LIKE '" + date + "%'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         int cursorCount = cursor.getCount();
@@ -76,7 +76,39 @@ public class SqliteHelper extends SQLiteOpenHelper {
     public ArrayList<Milk_Items> getAllData() {
         ArrayList<Milk_Items> milk_items = new ArrayList<>();
         // select query
-        String selectQuery = "SELECT  * FROM " + TABLE_NAME + " ORDER BY " + KEY_DATE_N_TIME;
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + KEY_DATE_N_TIME;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all table records and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Milk_Items milk_items1 = new Milk_Items(null, null, 0);
+                milk_items1.setID(Integer.parseInt(cursor.getString(0)));
+                milk_items1.setMilk_Quantity(cursor.getString(1));
+                milk_items1.setTotal_Milk(cursor.getInt(2));
+                if (cursor.getString(3).toString().startsWith("0")) {
+                    String s = cursor.getString(3).toString().replaceFirst("0", "");
+                    milk_items1.setDateNTime(s);
+                } else {
+                    milk_items1.setDateNTime(cursor.getString(3));
+                }
+
+                Grand_Total = Integer.parseInt(cursor.getString(2)) + Grand_Total;
+                // Adding milk_items1 to list
+                milk_items.add(milk_items1);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+
+        return milk_items;
+    }
+
+    public ArrayList<Milk_Items> getAllDatabyMonth(String month) {
+        ArrayList<Milk_Items> milk_items = new ArrayList<>();
+        // select query
+        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE " + KEY_DATE_N_TIME + " LIKE '%" + month + "%' ORDER BY " + KEY_DATE_N_TIME;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -160,34 +192,6 @@ public class SqliteHelper extends SQLiteOpenHelper {
         for (int i = 0; i < a.length; i++) {
             str[i] = String.valueOf(a[i]);
         }
-
-//        for (int i = 0; i < list.size(); i++) {
-//            if (list.get(i).toString().contains("-01-")) {
-//                str[i] = list.get(i).toString().replace("-01-", "Jan-");
-//            } else if (list.get(i).toString().contains("-02-")) {
-//                str[i] = list.get(i).toString().replace("-02-", "Feb-");
-//            } else if (list.get(i).toString().contains("-03-")) {
-//                str[i] = list.get(i).toString().replace("-03-", "Mar-");
-//            } else if (list.get(i).toString().contains("-04-")) {
-//                str[i] = list.get(i).toString().replace("-04-", "Apr-");
-//            } else if (list.get(i).toString().contains("-05-")) {
-//                str[i] = list.get(i).toString().replace("-05-", "May-");
-//            } else if (list.get(i).toString().contains("-06-")) {
-//                str[i] = list.get(i).toString().replace("-06-", "Jun-");
-//            } else if (list.get(i).toString().contains("-07-")) {
-//                str[i] = list.get(i).toString().replace("-07-", "Jul-");
-//            } else if (list.get(i).toString().contains("-08-")) {
-//                str[i] = list.get(i).toString().replace("-08-", "Aug-");
-//            } else if (list.get(i).toString().contains("-09-")) {
-//                str[i] = list.get(i).toString().replace("-09-", "Sep-");
-//            } else if (list.get(i).toString().contains("-10-")) {
-//                str[i] = list.get(i).toString().replace("-10-", "Oct-");
-//            } else if (list.get(i).toString().contains("-11-")) {
-//                str[i] = list.get(i).toString().replace("-11-", "Nov-");
-//            } else if (list.get(i).toString().contains("-12-")) {
-//                str[i] = list.get(i).toString().replace("-12-", "Dec-");
-//            }
-//        }
 
         return str;
     }
