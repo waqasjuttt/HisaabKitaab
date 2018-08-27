@@ -7,6 +7,7 @@ import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.annotation.MainThread;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -79,9 +80,7 @@ public class List_Milk_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.list_milk_fragment, container, false);
-
         fragmentManager = getActivity().getSupportFragmentManager();
-        getActivity().setTitle(" Hisab Kitab List");
 
         initComponents();
         setListners();

@@ -30,6 +30,8 @@ public class Tablayout_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.tablayout_fragment, container, false);
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle("Hisab Kitab List");
+        ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initComopnents();
         return view;
@@ -42,6 +44,8 @@ public class Tablayout_Fragment extends Fragment {
 
         tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
+
+        viewPager.setCurrentItem(Integer.parseInt(String.valueOf(tabLayout.getTabCount())));
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

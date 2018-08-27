@@ -40,7 +40,8 @@ public class Main_Fragment extends Fragment {
         view = inflater.inflate(R.layout.main_fragment, container, false);
 
         fragmentManager = getActivity().getSupportFragmentManager();
-        getActivity().setTitle(" Home");
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle(" Home");
+        ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         initComponents();
 

@@ -73,7 +73,8 @@ public class AddDailMilk_Fragment extends Fragment implements View.OnClickListen
         view = inflater.inflate(R.layout.add_dail_milk_fragment, container, false);
 
         fragmentManager = getActivity().getSupportFragmentManager();
-        getActivity().setTitle(" Add Daily Milk");
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle("Add Daily Milk");
+        ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initComponents();
         setListners();
