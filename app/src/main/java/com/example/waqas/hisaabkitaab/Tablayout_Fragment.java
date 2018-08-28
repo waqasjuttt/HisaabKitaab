@@ -32,9 +32,16 @@ public class Tablayout_Fragment extends Fragment {
         view = inflater.inflate(R.layout.tablayout_fragment, container, false);
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("Hisab Kitab List");
         ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((MainActivity) getActivity()).item.setVisible(true);
 
         initComopnents();
         return view;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        ((MainActivity) getActivity()).item.setVisible(false);
     }
 
     private void initComopnents() {

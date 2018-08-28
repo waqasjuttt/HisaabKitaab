@@ -204,7 +204,8 @@ public class SqliteHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    // Updating a record in database table
+    ////////////////////////////////////////// Updating a record in database table //////////////////////////////////////////////////////////////
+
     public int updateMilkData(Milk_Items milk_items) {
         SQLiteDatabase db = this.getWritableDatabase();
 
