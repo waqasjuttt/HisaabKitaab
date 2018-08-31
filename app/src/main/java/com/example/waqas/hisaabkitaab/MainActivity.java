@@ -13,7 +13,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static FragmentManager fragmentManager;
     public FragmentTransaction fragmentTransaction;
-    MenuItem item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,22 +36,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_item, menu);
-        item = menu.findItem(R.id.delete);
-        item.setVisible(false);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
-                break;
-            case R.id.delete:
-                Toast.makeText(MainActivity.this, "Selected!", Toast.LENGTH_SHORT).show();
                 break;
         }
         return super.onOptionsItemSelected(item);

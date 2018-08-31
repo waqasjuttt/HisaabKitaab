@@ -53,6 +53,7 @@ public class List_Milk_Fragment extends Fragment {
     static final int TIME_DIALOG_ID = 1111;
 
     private Dialog MyDialogForMilk;
+    private Button btn_Delete;
     ListView listView;
     ArrayList<Milk_Items> milk_items_list;
     TextView tv_Grand_Total_Price, tv_Per_KG, tv_Total, tv_Total_Days;
@@ -93,6 +94,7 @@ public class List_Milk_Fragment extends Fragment {
         tv_Grand_Total_Price = (TextView) view.findViewById(R.id.tv_Grand_Total_Price);
         btnAdd = (Button) view.findViewById(R.id.btn_Add_Extra_Milk);
         tv_Total_Days = (TextView) view.findViewById(R.id.tv_Total_Days);
+        btn_Delete = (Button) view.findViewById(R.id.btn_Delete);
 
         sqliteHelper = new SqliteHelper(getActivity());
         milk_items_list = new ArrayList<>();
@@ -131,6 +133,42 @@ public class List_Milk_Fragment extends Fragment {
                 return false;
             }
         });
+
+        btn_Delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sqliteHelper.deleteAllData(month);
+                fragmentManager.beginTransaction().replace(R.id.container, new Tablayout_Fragment()).commit();
+            }
+        });
+
+        if (month.toString().contains("-01-") && listView.getAdapter().getCount() == 31) {
+            btn_Delete.setVisibility(View.VISIBLE);
+        } else if (month.toString().contains("-02-") && (listView.getAdapter().getCount() == 28 || listView.getAdapter().getCount() == 29)) {
+            btn_Delete.setVisibility(View.VISIBLE);
+        } else if (month.toString().contains("-03-") && listView.getAdapter().getCount() == 31) {
+            btn_Delete.setVisibility(View.VISIBLE);
+        } else if (month.toString().contains("-04-") && listView.getAdapter().getCount() == 30) {
+            btn_Delete.setVisibility(View.VISIBLE);
+        } else if (month.toString().contains("-05-") && listView.getAdapter().getCount() == 31) {
+            btn_Delete.setVisibility(View.VISIBLE);
+        } else if (month.toString().contains("-06-") && listView.getAdapter().getCount() == 30) {
+            btn_Delete.setVisibility(View.VISIBLE);
+        } else if (month.toString().contains("-07-") && listView.getAdapter().getCount() == 31) {
+            btn_Delete.setVisibility(View.VISIBLE);
+        } else if (month.toString().contains("-08-") && listView.getAdapter().getCount() == 4) {
+            btn_Delete.setVisibility(View.VISIBLE);
+        } else if (month.toString().contains("-09-") && listView.getAdapter().getCount() == 30) {
+            btn_Delete.setVisibility(View.VISIBLE);
+        } else if (month.toString().contains("-10-") && listView.getAdapter().getCount() == 31) {
+            btn_Delete.setVisibility(View.VISIBLE);
+        } else if (month.toString().contains("-11-") && listView.getAdapter().getCount() == 30) {
+            btn_Delete.setVisibility(View.VISIBLE);
+        } else if (month.toString().contains("-12-") && listView.getAdapter().getCount() == 31) {
+            btn_Delete.setVisibility(View.VISIBLE);
+        } else {
+            btn_Delete.setVisibility(View.GONE);
+        }
     }
 
     public void hideKeyboard(View view) {

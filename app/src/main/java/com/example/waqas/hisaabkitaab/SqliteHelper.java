@@ -185,12 +185,13 @@ public class SqliteHelper extends SQLiteOpenHelper {
 
         int[] a = new int[str.length];
         for (int i = 0; i < a.length; i++) {
-            a[i] = Integer.parseInt(str[i]);
+            a[i] = Integer.parseInt(String.valueOf(str[i]));
         }
         Arrays.sort(a);
 
         for (int i = 0; i < a.length; i++) {
             str[i] = String.valueOf(a[i]);
+//            Toast.makeText(ctx, "SQLite: " + String.valueOf(str[i]), Toast.LENGTH_SHORT).show();
         }
 
         return str;
@@ -202,6 +203,16 @@ public class SqliteHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, KEY_ID + " = ?", new String[]{String.valueOf(milk_items.getID())});
         db.close();
+    }
+
+    public void deleteAllData(String monthViseDelete) {
+        //Open the database
+        SQLiteDatabase database = this.getWritableDatabase();
+        //Execute sql query to remove from database
+        //NOTE: When removing by String in SQL, value must be enclosed with ''
+        database.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + KEY_DATE_N_TIME + " LIKE '%" + monthViseDelete + "%'");
+        //Close the database
+        database.close();
     }
 
     ////////////////////////////////////////// Updating a record in database table //////////////////////////////////////////////////////////////

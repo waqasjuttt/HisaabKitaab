@@ -32,16 +32,10 @@ public class Tablayout_Fragment extends Fragment {
         view = inflater.inflate(R.layout.tablayout_fragment, container, false);
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("Hisab Kitab List");
         ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((MainActivity) getActivity()).item.setVisible(true);
+//        ((MainActivity) getActivity()).item.setVisible(true);
 
         initComopnents();
         return view;
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        ((MainActivity) getActivity()).item.setVisible(false);
     }
 
     private void initComopnents() {
@@ -80,6 +74,7 @@ public class Tablayout_Fragment extends Fragment {
         TablayoutAdapter adapter = new TablayoutAdapter(getActivity().getSupportFragmentManager());
         String[] str1 = sqliteHelper.getDates();
         for (String str : str1) {
+//            Toast.makeText(getActivity(), "TabLayout: " + String.valueOf(str), Toast.LENGTH_SHORT).show();
             if (str.toString().equals("1")) {
                 adapter.addFrag(new List_Milk_Fragment("-01-"), "Jan");
             } else if (str.toString().equals("2")) {
@@ -105,6 +100,10 @@ public class Tablayout_Fragment extends Fragment {
             } else if (str.toString().equals("12")) {
                 adapter.addFrag(new List_Milk_Fragment("-12-"), "Dec");
             }
+        }
+
+        if (str1.length == 0) {
+            Toast.makeText(getActivity(), "List is Empty", Toast.LENGTH_SHORT).show();
         }
         viewPager.setAdapter(adapter);
     }

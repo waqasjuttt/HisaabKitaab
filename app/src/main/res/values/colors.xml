@@ -13,7 +13,7 @@
     <color name="colorButtonNormal">#757575</color>
     <color name="tabIndicatorColor">#FF5252</color>
     <color name="white">#ffffff</color>
-    <color name="TabTextColor">#8c9297</color>
-    <color name="SelectedTabColor">#48494a</color>
+    <color name="TabTextColor">#000000</color>
+    <color name="SelectedTabColor">#ffffff</color>
     <color name="backgroundColor">#f6fafb</color>
 </resources>

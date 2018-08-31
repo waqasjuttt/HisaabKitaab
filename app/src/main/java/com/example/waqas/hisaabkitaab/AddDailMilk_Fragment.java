@@ -75,6 +75,7 @@ public class AddDailMilk_Fragment extends Fragment implements View.OnClickListen
         fragmentManager = getActivity().getSupportFragmentManager();
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("Add Daily Milk");
         ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        ((MainActivity) getActivity()).item.setVisible(false);
 
         initComponents();
         setListners();

@@ -10,77 +10,11 @@
     android:orientation="vertical"
     tools:context="com.example.waqas.hisaabkitaab.List_Milk_Fragment">
 
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginLeft="10dp"-->
-    <!--android:layout_marginRight="10dp"-->
-    <!--android:layout_marginTop="3dp"-->
-    <!--android:background="@drawable/search_background"-->
-    <!--android:orientation="horizontal">-->
-
-    <!--<ImageView-->
-    <!--android:layout_width="20dp"-->
-    <!--android:layout_height="20dp"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:src="@drawable/search_red" />-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="horizontal"-->
-    <!--android:weightSum="10">-->
-
-    <!--<EditText-->
-    <!--android:id="@+id/et_Search"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:layout_marginLeft="5dp"-->
-    <!--android:layout_weight="9"-->
-    <!--android:background="@null"-->
-    <!--android:gravity="left"-->
-    <!--android:hint="Search by city"-->
-    <!--android:inputType="date"-->
-    <!--android:padding="5dp" />-->
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/btnClose"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:layout_weight="1"-->
-    <!--android:gravity="center"-->
-    <!--android:visibility="gone">-->
-
-    <!--<ImageView-->
-    <!--android:layout_width="25dp"-->
-    <!--android:layout_height="25dp"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:src="@drawable/close_black" />-->
-    <!--</LinearLayout>-->
-    <!--</LinearLayout>-->
-
-    <!--<View-->
-    <!--android:id="@+id/View_UnderLine"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="1dp"-->
-    <!--android:layout_marginLeft="10dp"-->
-    <!--android:layout_marginTop="2dp"-->
-    <!--android:background="#969696" />-->
-    <!--</LinearLayout>-->
-    <!--</LinearLayout>-->
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/backgroundColor"
+        android:background="#9bd747"
         android:clickable="true"
         android:focusable="true"
         android:focusableInTouchMode="true"
@@ -137,12 +71,32 @@
         android:layout_below="@+id/linearLayout"
         android:background="#000" />
 
-    <ListView
-        android:id="@+id/listView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/view"
-        android:layout_margin="5dp"
-        android:background="@color/backgroundColor" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="100">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view"
+            android:layout_margin="5dp"
+            android:layout_weight="90"
+            android:background="@color/backgroundColor" />
+
+        <Button
+            android:id="@+id/btn_Delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:layout_weight="10"
+            android:background="@drawable/round_button"
+            android:gravity="center"
+            android:text="Delete All Data"
+            android:visibility="visible" />
+    </LinearLayout>
 
 </LinearLayout>
