@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.text.InputType;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -150,7 +151,55 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
 //                            sqliteHelper.updateMilkData(milkItems); //update to db
 
                             sqliteHelper.update(et_milk_quantity.getText().toString(), total, (getItem(position).getDateNTime().toString()));
-                            Toast.makeText(getContext(), "Data updated at " + String.valueOf(getItem(position).getDateNTime().toString().substring(0, 11)), Toast.LENGTH_LONG).show();
+                            if (getItem(position).getDateNTime().toString().contains("-01-")) {
+                                Toast toast = Toast.makeText(getContext(), "Data updated at " + String.valueOf(getItem(position).getDateNTime().toString().replace("-01-", "-Jan-").substring(0, 10)), Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                            } else if (getItem(position).getDateNTime().toString().contains("-02-")) {
+                                Toast toast = Toast.makeText(getContext(), "Data updated at " + String.valueOf(getItem(position).getDateNTime().toString().replace("-02-", "-Feb-").substring(0, 10)), Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                            } else if (getItem(position).getDateNTime().toString().contains("-03-")) {
+                                Toast toast = Toast.makeText(getContext(), "Data updated at " + String.valueOf(getItem(position).getDateNTime().toString().replace("-03-", "-Mar-").substring(0, 10)), Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                            } else if (getItem(position).getDateNTime().toString().contains("-04-")) {
+                                Toast toast = Toast.makeText(getContext(), "Data updated at " + String.valueOf(getItem(position).getDateNTime().toString().replace("-04-", "-Apr-").substring(0, 10)), Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                            } else if (getItem(position).getDateNTime().toString().contains("-05-")) {
+                                Toast toast = Toast.makeText(getContext(), "Data updated at " + String.valueOf(getItem(position).getDateNTime().toString().replace("-05-", "-May-").substring(0, 10)), Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                            } else if (getItem(position).getDateNTime().toString().contains("--06--")) {
+                                Toast toast = Toast.makeText(getContext(), "Data updated at " + String.valueOf(getItem(position).getDateNTime().toString().replace("-06-", "-Jun-").substring(0, 10)), Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                            } else if (getItem(position).getDateNTime().toString().contains("-07-")) {
+                                Toast toast = Toast.makeText(getContext(), "Data updated at " + String.valueOf(getItem(position).getDateNTime().toString().replace("-07-", "-Jul-").substring(0, 10)), Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                            } else if (getItem(position).getDateNTime().toString().contains("-08-")) {
+                                Toast toast = Toast.makeText(getContext(), "Data updated at " + String.valueOf(getItem(position).getDateNTime().toString().replace("-08-", "-Aug-").substring(0, 10)), Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                            } else if (getItem(position).getDateNTime().toString().contains("-09-")) {
+                                Toast toast = Toast.makeText(getContext(), "Data updated at " + String.valueOf(getItem(position).getDateNTime().toString().replace("-09-", "-Sep-").substring(0, 10)), Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                            } else if (getItem(position).getDateNTime().toString().contains("-10-")) {
+                                Toast toast = Toast.makeText(getContext(), "Data updated at " + String.valueOf(getItem(position).getDateNTime().toString().replace("-10-", "-Oct-").substring(0, 10)), Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                            } else if (getItem(position).getDateNTime().toString().contains("-11-")) {
+                                Toast toast = Toast.makeText(getContext(), "Data updated at " + String.valueOf(getItem(position).getDateNTime().toString().replace("-11-", "-Nov-").substring(0, 10)), Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                            } else if (getItem(position).getDateNTime().toString().contains("-12-")) {
+                                Toast toast = Toast.makeText(getContext(), "Data updated at " + String.valueOf(getItem(position).getDateNTime().toString().replace("-12-", "-Dec-").substring(0, 10)), Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                            }
 
                             //reload the database to view
                             sqliteHelper.Grand_Total = 0;
