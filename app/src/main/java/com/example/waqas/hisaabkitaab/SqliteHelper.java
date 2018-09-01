@@ -20,6 +20,9 @@ public class SqliteHelper extends SQLiteOpenHelper {
     int Grand_Total = 0;
     private static final int VERSION = 1;
     public static final String TABLE_NAME = "milk_table";
+    public static final String TABLE_MOBILE_NUMBER = "mobile_table";
+    public static final String KEY_MOBILE = "mobile";
+    public static final String KEY_PASSWORD = "password";
     public static final String KEY_ID = "id";
     public static final String KEY_MILK_KG = "milk_kg";
     public static final String KEY_TOTAL_PRICE = "total_price";
@@ -32,15 +35,22 @@ public class SqliteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        String CREATE_MOBILE_TABLE = "CREATE TABLE " + TABLE_MOBILE_NUMBER + "("
+                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_MOBILE + " TEXT,"
+                + KEY_PASSWORD + " TEXT" + ")";
+
         String CREATE_MILK_TABLE = "CREATE TABLE " + TABLE_NAME + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_MILK_KG + " TEXT,"
                 + KEY_TOTAL_PRICE + " INTEGER," + KEY_DATE_N_TIME + " TEXT" + ")";
+
         sqLiteDatabase.execSQL(CREATE_MILK_TABLE);
+        sqLiteDatabase.execSQL(CREATE_MOBILE_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MOBILE_NUMBER);
         onCreate(db);
     }
 

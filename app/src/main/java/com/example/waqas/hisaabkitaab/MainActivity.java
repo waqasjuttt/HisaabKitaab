@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             fragmentManager
                     .beginTransaction()
-                    .replace(R.id.container, new Main_Fragment()
-                            , Utils.Mian_Fragment)
+                    .replace(R.id.container, new LoginFragment()
+                            )
                     .commit();
         }
     }
