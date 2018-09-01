@@ -179,7 +179,7 @@ public class List_Milk_Fragment extends Fragment {
             btn_Delete.setVisibility(View.VISIBLE);
         } else if (month.toString().contains("-07-") && listView.getAdapter().getCount() == 31) {
             btn_Delete.setVisibility(View.VISIBLE);
-        } else if (month.toString().contains("-08-") && listView.getAdapter().getCount() == 10) {
+        } else if (month.toString().contains("-08-") && listView.getAdapter().getCount() == 31) {
             btn_Delete.setVisibility(View.VISIBLE);
         } else if (month.toString().contains("-09-") && listView.getAdapter().getCount() == 30) {
             btn_Delete.setVisibility(View.VISIBLE);
