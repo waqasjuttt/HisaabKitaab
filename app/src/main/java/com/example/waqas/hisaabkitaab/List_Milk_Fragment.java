@@ -1,11 +1,14 @@
 package com.example.waqas.hisaabkitaab;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.MainThread;
 import android.support.v4.app.DialogFragment;
@@ -137,8 +140,28 @@ public class List_Milk_Fragment extends Fragment {
         btn_Delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sqliteHelper.deleteAllData(month);
-                fragmentManager.beginTransaction().replace(R.id.container, new Tablayout_Fragment()).commit();
+
+                AlertDialog.Builder builder;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
+                } else {
+                    builder = new AlertDialog.Builder(getActivity());
+                }
+                builder.setTitle("Delete All Data")
+                        .setMessage("کیا آپ سارا ڈیٹا ختم کرنا چاہتے ہیں؟")
+                        .setPositiveButton("ہاں", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                sqliteHelper.deleteAllData(month);
+                                fragmentManager.beginTransaction().replace(R.id.container, new Tablayout_Fragment()).commit();
+                            }
+                        })
+                        .setNegativeButton("نہیں", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
             }
         });
 
@@ -156,7 +179,7 @@ public class List_Milk_Fragment extends Fragment {
             btn_Delete.setVisibility(View.VISIBLE);
         } else if (month.toString().contains("-07-") && listView.getAdapter().getCount() == 31) {
             btn_Delete.setVisibility(View.VISIBLE);
-        } else if (month.toString().contains("-08-") && listView.getAdapter().getCount() == 4) {
+        } else if (month.toString().contains("-08-") && listView.getAdapter().getCount() == 10) {
             btn_Delete.setVisibility(View.VISIBLE);
         } else if (month.toString().contains("-09-") && listView.getAdapter().getCount() == 30) {
             btn_Delete.setVisibility(View.VISIBLE);

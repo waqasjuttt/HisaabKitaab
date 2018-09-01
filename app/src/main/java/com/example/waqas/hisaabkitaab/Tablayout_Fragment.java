@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 public class Tablayout_Fragment extends Fragment {
 
+    LinearLayout linearLayout_Tab;
     View view;
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -39,12 +40,20 @@ public class Tablayout_Fragment extends Fragment {
     }
 
     private void initComopnents() {
+        linearLayout_Tab = (LinearLayout) view.findViewById(R.id.linearLayout_Tab);
         sqliteHelper = new SqliteHelper(getActivity());
         viewPager = (ViewPager) view.findViewById(R.id.view_pager);
-        addTabs(viewPager);
 
         tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
+
+        addTabs(viewPager);
+
+        if (tabLayout.getTabCount() == 0) {
+            linearLayout_Tab.setBackgroundResource(R.color.backgroundColor);
+        } else {
+            linearLayout_Tab.setBackgroundResource(R.color.TabBackground);
+        }
 
         viewPager.setCurrentItem(Integer.parseInt(String.valueOf(tabLayout.getTabCount())));
 
@@ -74,7 +83,6 @@ public class Tablayout_Fragment extends Fragment {
         TablayoutAdapter adapter = new TablayoutAdapter(getActivity().getSupportFragmentManager());
         String[] str1 = sqliteHelper.getDates();
         for (String str : str1) {
-//            Toast.makeText(getActivity(), "TabLayout: " + String.valueOf(str), Toast.LENGTH_SHORT).show();
             if (str.toString().equals("1")) {
                 adapter.addFrag(new List_Milk_Fragment("-01-"), "Jan");
             } else if (str.toString().equals("2")) {
@@ -103,7 +111,7 @@ public class Tablayout_Fragment extends Fragment {
         }
 
         if (str1.length == 0) {
-            Toast.makeText(getActivity(), "List is Empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "List is Empty", Toast.LENGTH_LONG).show();
         }
         viewPager.setAdapter(adapter);
     }

@@ -144,9 +144,12 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
                         } else {
                             int total = Integer.parseInt(et_milk_quantity.getText().toString());
                             total = total * 75;
-                            Milk_Items milkItems = new Milk_Items((getItem(position).getDateNTime().toString()), et_milk_quantity.getText().toString(), total);
-                            milkItems.setID(getItem(position).getID());
-                            sqliteHelper.updateMilkData(milkItems); //update to db
+
+//                            Milk_Items milkItems = new Milk_Items((getItem(position).getDateNTime().toString()), et_milk_quantity.getText().toString(), total);
+//                            milkItems.setID(getItem(position).getID());
+//                            sqliteHelper.updateMilkData(milkItems); //update to db
+
+                            sqliteHelper.update(et_milk_quantity.getText().toString(), total, (getItem(position).getDateNTime().toString()));
                             Toast.makeText(getContext(), "Data updated at " + String.valueOf(getItem(position).getDateNTime().toString().substring(0, 11)), Toast.LENGTH_LONG).show();
 
                             //reload the database to view

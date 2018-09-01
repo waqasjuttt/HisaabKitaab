@@ -185,13 +185,23 @@ public class SqliteHelper extends SQLiteOpenHelper {
 
         int[] a = new int[str.length];
         for (int i = 0; i < a.length; i++) {
-            a[i] = Integer.parseInt(String.valueOf(str[i]));
+            a[i] = Integer.parseInt(str[i]);
         }
         Arrays.sort(a);
 
+//        for (int i = 0; i < a.length; i++) {
+//            for (int j = i + 1; j < a.length; j++) {
+//                int tmp = 0;
+//                if (a[i] > a[j]) {
+//                    tmp = a[i];
+//                    a[i] = a[j];
+//                    a[j] = tmp;
+//                }
+//            }
+//        }
+
         for (int i = 0; i < a.length; i++) {
             str[i] = String.valueOf(a[i]);
-//            Toast.makeText(ctx, "SQLite: " + String.valueOf(str[i]), Toast.LENGTH_SHORT).show();
         }
 
         return str;
@@ -217,7 +227,12 @@ public class SqliteHelper extends SQLiteOpenHelper {
 
     ////////////////////////////////////////// Updating a record in database table //////////////////////////////////////////////////////////////
 
-    public int updateMilkData(Milk_Items milk_items) {
+    public void update(String kg, int total, String date) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("UPDATE " + TABLE_NAME + " SET " + KEY_MILK_KG + " = '" + kg + "' , " + KEY_TOTAL_PRICE + " = '" + total + "' WHERE " + KEY_DATE_N_TIME + " LIKE '%" + date + "%'");
+    }
+
+    /*public int updateMilkData(Milk_Items milk_items) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -239,5 +254,5 @@ public class SqliteHelper extends SQLiteOpenHelper {
         db.close();
 
         return count;
-    }
+    }*/
 }
