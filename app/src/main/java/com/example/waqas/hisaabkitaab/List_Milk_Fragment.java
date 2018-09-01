@@ -165,29 +165,29 @@ public class List_Milk_Fragment extends Fragment {
             }
         });
 
-        if (month.toString().contains("-01-") && listView.getAdapter().getCount() == 31) {
+        if (month.toString().contains("-01-") && listView.getAdapter().getCount() >= 31) {
             btn_Delete.setVisibility(View.VISIBLE);
-        } else if (month.toString().contains("-02-") && (listView.getAdapter().getCount() == 28 || listView.getAdapter().getCount() == 29)) {
+        } else if (month.toString().contains("-02-") && (listView.getAdapter().getCount() >= 28 || listView.getAdapter().getCount() >= 29)) {
             btn_Delete.setVisibility(View.VISIBLE);
-        } else if (month.toString().contains("-03-") && listView.getAdapter().getCount() == 31) {
+        } else if (month.toString().contains("-03-") && listView.getAdapter().getCount() >= 31) {
             btn_Delete.setVisibility(View.VISIBLE);
-        } else if (month.toString().contains("-04-") && listView.getAdapter().getCount() == 30) {
+        } else if (month.toString().contains("-04-") && listView.getAdapter().getCount() >= 30) {
             btn_Delete.setVisibility(View.VISIBLE);
-        } else if (month.toString().contains("-05-") && listView.getAdapter().getCount() == 31) {
+        } else if (month.toString().contains("-05-") && listView.getAdapter().getCount() >= 31) {
             btn_Delete.setVisibility(View.VISIBLE);
-        } else if (month.toString().contains("-06-") && listView.getAdapter().getCount() == 30) {
+        } else if (month.toString().contains("-06-") && listView.getAdapter().getCount() >= 30) {
             btn_Delete.setVisibility(View.VISIBLE);
-        } else if (month.toString().contains("-07-") && listView.getAdapter().getCount() == 31) {
+        } else if (month.toString().contains("-07-") && listView.getAdapter().getCount() >= 31) {
             btn_Delete.setVisibility(View.VISIBLE);
-        } else if (month.toString().contains("-08-") && listView.getAdapter().getCount() == 31) {
+        } else if (month.toString().contains("-08-") && listView.getAdapter().getCount() >= 31) {
             btn_Delete.setVisibility(View.VISIBLE);
-        } else if (month.toString().contains("-09-") && listView.getAdapter().getCount() == 30) {
+        } else if (month.toString().contains("-09-") && listView.getAdapter().getCount() >= 30) {
             btn_Delete.setVisibility(View.VISIBLE);
-        } else if (month.toString().contains("-10-") && listView.getAdapter().getCount() == 31) {
+        } else if (month.toString().contains("-10-") && listView.getAdapter().getCount() >= 31) {
             btn_Delete.setVisibility(View.VISIBLE);
-        } else if (month.toString().contains("-11-") && listView.getAdapter().getCount() == 30) {
+        } else if (month.toString().contains("-11-") && listView.getAdapter().getCount() >= 30) {
             btn_Delete.setVisibility(View.VISIBLE);
-        } else if (month.toString().contains("-12-") && listView.getAdapter().getCount() == 31) {
+        } else if (month.toString().contains("-12-") && listView.getAdapter().getCount() >= 31) {
             btn_Delete.setVisibility(View.VISIBLE);
         } else {
             btn_Delete.setVisibility(View.GONE);
