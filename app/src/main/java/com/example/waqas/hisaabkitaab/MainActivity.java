@@ -1,5 +1,6 @@
 package com.example.waqas.hisaabkitaab;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -24,14 +25,19 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             fragmentManager
                     .beginTransaction()
-                    .replace(R.id.container, new LoginFragment()
-                            )
+                    .replace(R.id.container, new LoginFragment())
                     .commit();
         }
     }
 
     @Override
     public void onBackPressed() {
+        // Find the tag of fragments
+        Fragment Main_Fragment = fragmentManager
+                .findFragmentByTag(Utils.Mian_Fragment);
+        if (Main_Fragment == null) {
+            super.onBackPressed();
+        }
         super.onBackPressed();
     }
 

@@ -1,156 +1,95 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.waqas.hisaabkitaab.LoginFragment">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/Margin_20dp"
-        android:hint="Enter the pin code" />
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/lock" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:text="Enter your 4-digit Pincode"
+        android:textSize="20sp" />
 
-        <Button
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/one_selector" />
-
-        <Button
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/two" />
-
-        <Button
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@drawable/three" />
-    </LinearLayout>
-
-    <LinearLayout
+    <com.goodiebag.pinview.Pinview
+        android:id="@+id/pinView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_marginTop="5dp"
+        app:forceKeyboard="true"
+        app:cursorVisible="true"
+        app:hint="0"
+        app:inputType="number"
+        app:password="true"
+        app:pinBackground="@drawable/pin_selector"
+        app:pinHeight="50dp"
+        app:pinLength="4"
+        app:pinWidth="50dp" />
 
-        <Button
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/four" />
-
-        <Button
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/five" />
-
-        <Button
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@drawable/six" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/seven" />
-
-        <Button
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/eight" />
-
-        <Button
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@drawable/nine" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginRight="40dp"
-            android:gravity="center"
-            android:textColor="#000"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/zero" />
-
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textColor="#000"
-            android:textStyle="bold" />
-    </LinearLayout>
+        android:text="Pincode is: 1234"
+        android:textColor="#000"
+        android:textSize="16sp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginTop="10dp"
         android:background="#000" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="13dp"
         android:gravity="bottom"
         android:orientation="horizontal"
         android:weightSum="20">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:layout_weight="10"
-            android:text="Signup"
-            android:textColor="#000" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Don't have an account? "
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/tv_signup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Signup"
+                android:textColor="#ff009d" />
+        </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_forgot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginRight="10dp"
             android:layout_weight="10"
             android:gravity="right"
-            android:text="Forgot Password?"
+            android:text="Forgot Pincode?"
             android:textColor="#000" />
     </LinearLayout>
 

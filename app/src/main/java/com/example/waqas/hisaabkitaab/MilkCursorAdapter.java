@@ -123,7 +123,7 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
                 et_milk_quantity.setInputType(InputType.TYPE_CLASS_NUMBER);
                 et_milk_quantity.setFocusable(true);
                 et_milk_quantity.setFocusableInTouchMode(true);
-                et_milk_quantity.setHint("Milk Quantity");
+                et_milk_quantity.setHint("Milk quantity should be greater than 0 or less than 16");
                 layout.addView(et_milk_quantity);
 
                 et_milk_quantity.setText(getItem(position).getMilk_Quantity());
@@ -137,12 +137,18 @@ public class MilkCursorAdapter extends ArrayAdapter<Milk_Items> {
                     public void onClick(DialogInterface dialog, int which) {
                         int value = Integer.parseInt(et_milk_quantity.getText().toString());
                         if (value > 15) {
-                            Toast.makeText(getContext(), "دودھ کی مقدار 1 سے 15 تک ہونی چاہی", Toast.LENGTH_SHORT).show();
-                            fragmentManager
-                                    .beginTransaction()
-                                    .replace(R.id.container, new Tablayout_Fragment())
-                                    .commit();
-                        } else {
+                            Toast toast = Toast.makeText(getContext(), "دودھ کی مقدار 1 سے 15 تک ہونی چاہی", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+//                            fragmentManager
+//                                    .beginTransaction()
+//                                    .replace(R.id.container, new Tablayout_Fragment())
+//                                    .commit();
+                        } else if (value == 0) {
+                            Toast toast = Toast.makeText(getContext(), "درست نمبر درج کریں!", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                        } else if (value < 16 && value > 0) {
                             int total = Integer.parseInt(et_milk_quantity.getText().toString());
                             total = total * 75;
 
